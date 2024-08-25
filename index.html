@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almustafa1</title>
+    <title>المصطفى للحلول البرمجية</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,10 +13,37 @@
             padding: 0;
         }
         header {
-            background-color: #008cba;
+            background-color: #008cbb;
             color: white;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
+            position: relative;
+        }
+        .nav-bar {
+            background-color: #ffffff; /* خلفية الشريط */
+            border-radius: 20px; /* جعل الشريط بيضوي */
+            border: 2px solid #008cba; /* حد الشريط بلون السماء */
+            text-align: center;
+            padding: 10px 0;
+            margin: 10px auto;
+            width: fit-content;
+            position: absolute;
+            top: 100%; /* وضع الشريط تحت اسم المصطفى 1 */
+            left: 20%;
+            transform: translateX(-10%);
+        }
+        .nav-bar button {
+            background-color: #00bfff; /* لون خلفية الأزرار */
+            color: #ffff00; /* لون نص الأزرار */
+            border: none;
+            border-radius: 20px; /* جعل الأزرار بيضوية */
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .nav-bar button:hover {
+            background-color: #87cefa; /* تغيير لون خلفية الأزرار عند المرور عليها */
         }
         main {
             padding: 20px;
@@ -31,7 +58,6 @@
             bottom: 0;
             width: 100%;
         }
-        /* زر "من نحن" */
         .about-btn {
             background-color: #90ee90; /* لون أخضر فاتح */
             color: white;
@@ -48,14 +74,20 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Almustafa1</h1>
+        <div class="nav-bar">
+            <button>الرئيسية</button>
+           
+            <button>البحث</button>
+            <button>الأقسام</button>
+        </div>
+        <h1>المصطفى للحلول البرمجة</h1>
     </header>
     <main>
-        <p>This is a simple webpage created for demonstration purposes.</p>
-        <button class="about-btn">من نحن</button>
+        
+        
     </main>
     <footer>
-        <p>&copy; 2024 Almustafa1. All rights reserved.</p>
+        <p>&copy; 2024 جميع الحقوق محفوظة لدى المصطفى للحلول البرمجة.</p>
     </footer>
 </body>
 </html>
