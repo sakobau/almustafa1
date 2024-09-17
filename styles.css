@@ -1,0 +1,105 @@
+/* تصميم أساسي للصفحة */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* تصميم العنوان في الأعلى */
+.header {
+    background-color: #000080;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* تصميم صندوق تسجيل الحساب */
+.signup-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.signup-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* تصميم العنوان داخل صندوق التسجيل */
+.signup-box h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+    font-size: 24px;
+}
+
+/* تصميم الحقول */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+}
+
+/* تصميم زر التسجيل */
+.signup-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #218838;
+}
+
+/* الكليشية في أسفل الصفحة */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer span {
+    color: #007bff;
+}
+
