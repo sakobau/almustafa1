@@ -22,36 +22,48 @@
     </style>
 </head>
 <body>
+    <!-- العنوان في الأعلى -->
     <header class="header">
         <h1>ســـــــوبر تــــــكنو</h1>
     </header>
 
+    <!-- قسم تسجيل الحساب -->
     <div class="signup-container">
         <div class="signup-box">
             <h2>إنشاء حساب جديد</h2>
             <form id="signupForm">
+                <!-- حقل اسم المستخدم -->
                 <div class="input-group">
                     <label for="username">اسم المستخدم</label>
                     <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
                 </div>
+
+                <!-- حقل البريد الإلكتروني -->
                 <div class="input-group">
                     <label for="email">البريد الإلكتروني</label>
                     <input type="email" id="email" placeholder="أدخل البريد الإلكتروني" required>
                 </div>
+
+                <!-- حقل كلمة المرور -->
                 <div class="input-group">
                     <label for="password">كلمة المرور</label>
                     <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
                 </div>
+
+                <!-- حقل تأكيد كلمة المرور -->
                 <div class="input-group">
                     <label for="confirm-password">تأكيد كلمة المرور</label>
                     <input type="password" id="confirm-password" placeholder="أعد إدخال كلمة المرور" required>
                 </div>
+
+                <!-- زر التسجيل -->
                 <button type="submit" class="signup-btn">إنشاء الحساب</button>
             </form>
             <div id="notification" class="notification"></div>
         </div>
     </div>
 
+    <!-- الكليشية في أسفل الصفحة -->
     <footer class="footer">
         <p>جميع الحقوق محفوظة لدى <span>ســـــــوبر تــــــكنو</span> للخدمات الالكترونية</p>
     </footer>
